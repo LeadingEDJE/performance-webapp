@@ -156,4 +156,20 @@ public class Service
     return Thread.currentThread().getName() + ": " + count;
   }
 
+  @GET
+  @Path("/deadlock/1")
+  public String deadlock1()
+  {
+    synch.oneThenTwo();
+    return Thread.currentThread().getName();
+  }
+
+  @GET
+  @Path("/deadlock/2")
+  public String deadlock2()
+  {
+    synch.twoThenOne();
+    return Thread.currentThread().getName();
+  }
+
 }
