@@ -17,3 +17,4 @@ JAX-RS REST service simulates a number of possible bottlenecks:
 * /performance-webapp/executor/fib/<n> - generate "n"th number in fibonnaci sequence using executor service
 * /performance-webapp/deadlock/1 - Lock object 1 then 2
 * /performance-webapp/deadlock/2 - Lock object 2 then 1
+* /performance-webapp/memory/<n> - generates "n" Random UUIDs and stores in session

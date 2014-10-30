@@ -7,10 +7,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import jersey.repackaged.com.google.common.base.Stopwatch;
@@ -169,6 +172,15 @@ public class Service
   public String deadlock2()
   {
     synch.twoThenOne();
+    return Thread.currentThread().getName();
+  }
+
+  @GET
+  @Path("/memory/{count}")
+  public String memory(@PathParam("count") int count, @Context HttpServletRequest request)
+  {
+    HttpSession session = request.getSession(true);
+    session.setAttribute("uuids",CpuIntensive.uuids(count));
     return Thread.currentThread().getName();
   }
 
